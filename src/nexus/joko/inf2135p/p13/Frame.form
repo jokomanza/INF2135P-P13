@@ -67,7 +67,7 @@
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
                               <Component id="nimTextField" alignment="1" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="cancelButton" min="-2" pref="110" max="-2" attributes="0"/>
+                                  <Component id="deleteButton" min="-2" pref="110" max="-2" attributes="0"/>
                                   <EmptySpace pref="35" max="32767" attributes="0"/>
                                   <Component id="addButton" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
@@ -101,7 +101,7 @@
                   <EmptySpace pref="31" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="addButton" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cancelButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="deleteButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
               </Group>
@@ -141,12 +141,12 @@
             <Property name="text" type="java.lang.String" value="Major"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="cancelButton">
+        <Component class="javax.swing.JButton" name="deleteButton">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cancel"/>
+            <Property name="text" type="java.lang.String" value="Delete"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cancelButtonActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="deleteButtonActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -165,6 +165,9 @@
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mainTableMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

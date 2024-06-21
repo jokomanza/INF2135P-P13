@@ -4,6 +4,8 @@
  */
 package nexus.joko.inf2135p.p13;
 
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -12,6 +14,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Frame extends javax.swing.JFrame {
 
+    private int selectedRow = -1;
+    
     /**
      * Creates new form NewJFrame
      */
@@ -36,7 +40,7 @@ public class Frame extends javax.swing.JFrame {
         nameLabel = new javax.swing.JLabel();
         nimLabel = new javax.swing.JLabel();
         majorLabel = new javax.swing.JLabel();
-        cancelButton = new javax.swing.JButton();
+        deleteButton = new javax.swing.JButton();
         scrollPanel = new javax.swing.JScrollPane();
         mainTable = new javax.swing.JTable();
 
@@ -61,10 +65,10 @@ public class Frame extends javax.swing.JFrame {
 
         majorLabel.setText("Major");
 
-        cancelButton.setText("Cancel");
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+        deleteButton.setText("Delete");
+        deleteButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
+                deleteButtonActionPerformed(evt);
             }
         });
 
@@ -86,7 +90,7 @@ public class Frame extends javax.swing.JFrame {
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(nimTextField)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, mainPanelLayout.createSequentialGroup()
-                                .addComponent(cancelButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                                 .addComponent(addButton, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(majorTextField, javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +115,7 @@ public class Frame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addButton)
-                    .addComponent(cancelButton))
+                    .addComponent(deleteButton))
                 .addGap(15, 15, 15))
         );
 
@@ -129,6 +133,11 @@ public class Frame extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        mainTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mainTableMouseClicked(evt);
             }
         });
         scrollPanel.setViewportView(mainTable);
@@ -161,9 +170,15 @@ public class Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_nameTextFieldActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
+        if (selectedRow >= 0) {
+            DefaultTableModel model = (DefaultTableModel) mainTable.getModel();
+            model.removeRow(selectedRow);
+            selectedRow = -1;
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select row first");
+        }
+    }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addButtonActionPerformed
         
@@ -183,6 +198,17 @@ public class Frame extends javax.swing.JFrame {
         majorTextField.setText("");
     }//GEN-LAST:event_addButtonActionPerformed
 
+    private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        int column = source.columnAtPoint( evt.getPoint() );
+        String s=source.getModel().getValueAt(row, column)+"";
+        
+        selectedRow = row;
+    }//GEN-LAST:event_mainTableMouseClicked
+
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -221,7 +247,7 @@ public class Frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addButton;
-    private javax.swing.JButton cancelButton;
+    private javax.swing.JButton deleteButton;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JTable mainTable;
     private javax.swing.JLabel majorLabel;
