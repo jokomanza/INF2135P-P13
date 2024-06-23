@@ -201,8 +201,6 @@ public class Frame extends javax.swing.JFrame {
     private void mainTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainTableMouseClicked
         JTable source = (JTable)evt.getSource();
         int row = source.rowAtPoint( evt.getPoint() );
-        int column = source.columnAtPoint( evt.getPoint() );
-        String s=source.getModel().getValueAt(row, column)+"";
         
         selectedRow = row;
     }//GEN-LAST:event_mainTableMouseClicked
